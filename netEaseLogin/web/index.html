@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>网易邮箱</title>
+		<!-- 引入layui的核心css文件 -->
+		<link rel="stylesheet" href="layui-v2.5.6/layui/css/layui.css">
+		<!-- 引入layui的核心js文件（采用模块化引入） -->
+		<script src="layui-v2.5.6/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+	<ul class="layui-nav" lay-filter="">
+		<li class="layui-nav-item"><a href="javascript:void(0)">网易邮箱</a></li>
+		<li class="layui-nav-item layui-this"><a href="javascript:void(0)">你的专业电子邮局</a></li>
+		<li class="layui-nav-item"><a href="javascript:void(0)">手机版下载</a></li>
+		<li class="layui-nav-item">
+			<a href="javascript:void(0)">电脑版下载</a>
+			<dl class="layui-nav-child"> <!-- 二级菜单 -->
+				<dd><a href="javascript:void(0)">VIP</a></dd>
+				<dd><a href="javascript:void(0)">个人主界面</a></dd>
+				<dd><a href="javascript:void(0)">问题反馈</a></dd>
+			</dl>
+		</li>
+		<li class="layui-nav-item"><a href="javascript:void(0)">网易社区</a></li>
+	</ul>
+	<h1>我是网易邮箱主页</h1>
+	</body>
+	  <script>
+	            //JavaScript代码区域
+	            layui.use(['element', 'layer'], function () {
+	                var element = layui.element;
+	                var layer = layui.layer;
+
+
+	                $('#login').on('click', function () {
+	                    layer.open({
+	                        type: 2,    //弹出一个页面层
+	                        title: "登录",
+	                        content: 'login.html',
+	                        area: ['500px', '500px'],
+	                        anim: 1
+	                    })
+	                })
+	            });
+	        </script>
+</html>

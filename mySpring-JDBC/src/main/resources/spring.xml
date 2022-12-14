@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+        <!-- Spring自动扫描注解的配置 -->
+        <context:component-scan base-package="com.loda"/>
+
+        <!-- 加载properties 配置文件 -->
+        <context:property-placeholder location="jdbc.properties"/>
+
+        <!-- 配置 c3p0 数据源 -->
+        <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+                <!-- property标签的value属性对应的是jdbc.properties中的值 -->
+                <property name="driverClass" value="${jdbc.driver}"/>
+                <property name="jdbcUrl" value="${jdbc.url}"/>
+                <property name="user" value="${jdbc.user}"/>
+                <property name="password" value="${jdbc.password}"/>
+        </bean>
+
+        <!-- 配置JdbcTemplate实例，并注入一个dataSource数据源-->
+        <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+                <property name="dataSource" ref="dataSource"></property>
+        </bean>
+
+</beans>

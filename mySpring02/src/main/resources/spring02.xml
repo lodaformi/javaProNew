@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--set注入-->
+
+<!--    IOC通过property标签手动装配（注入）：-->
+<!--    Set方法注入-->
+<!--    name：bean对象中属性字段的名称-->
+<!--    ref：指定bean标签的id属性值-->
+
+    <bean id="typeService" class="com.loda.service.TypeService"></bean>
+    <bean id="typeServlet" class="com.loda.controller.TypeServlet">
+        <property name="typeService" ref="typeService" />
+        <property name="host" value="127.0.0.1"></property>
+        <property name="port" value="8088"></property>
+
+        <property name="list">
+            <list>
+                <value>上海</value>
+                <value>长沙</value>
+                <value>北京</value>
+            </list>
+        </property>
+
+        <property name="set">
+            <set>
+                <value>上海set</value>
+                <value>长沙set</value>
+                <value>北京set</value>
+            </set>
+        </property>
+
+        <property name="map">
+            <map>
+                <entry>
+                    <key><value>周杰伦</value></key>
+                    <value>晴天</value>
+                </entry>
+                <entry>
+                    <key><value>莫文蔚</value></key>
+                    <value>阴天</value>
+                </entry>
+                <entry>
+                    <key><value>孙燕姿</value></key>
+                    <value>雨天</value>
+                </entry>
+            </map>
+        </property>
+
+        <property name="properties">
+            <props>
+                <prop key="上海">东方明珠</prop>
+                <prop key="北京">天安门</prop>
+                <prop key="杭州">西湖</prop>
+            </props>
+        </property>
+    </bean>
+
+
+
+</beans>

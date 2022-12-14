@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.loda.dao.LoginInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.loda.entity.po.LoginInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="t_login_time" property="tLoginTime" jdbcType="TIMESTAMP" />
+    <result column="t_login_ip" property="tLoginIp" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, t_login_time, t_login_ip
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_login_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_login_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.loda.entity.po.LoginInfo" >
+    insert into t_login_info (id, user_id, t_login_time, 
+      t_login_ip)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{tLoginTime,jdbcType=TIMESTAMP}, 
+      #{tLoginIp,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.loda.entity.po.LoginInfo" >
+    insert into t_login_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="tLoginTime != null" >
+        t_login_time,
+      </if>
+      <if test="tLoginIp != null" >
+        t_login_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="tLoginTime != null" >
+        #{tLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tLoginIp != null" >
+        #{tLoginIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.loda.entity.po.LoginInfo" >
+    update t_login_info
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="tLoginTime != null" >
+        t_login_time = #{tLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tLoginIp != null" >
+        t_login_ip = #{tLoginIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.loda.entity.po.LoginInfo" >
+    update t_login_info
+    set user_id = #{userId,jdbcType=INTEGER},
+      t_login_time = #{tLoginTime,jdbcType=TIMESTAMP},
+      t_login_ip = #{tLoginIp,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByParams" parameterType="com.loda.query.LoginInfoQuery" resultType="com.loda.entity.po.LoginInfo">
+    select li.id, li.user_id, li.t_login_time, li.t_login_ip, u.username
+    from t_login_info li join t_user u
+    on (li.user_id = u.id)
+    <where>
+      <if test="tLoginTime != null and tLoginTime != ''">
+            li.t_login_time like  concat('%', #{tLoginTime} ,'%')
+      </if>
+    </where>
+  </select>
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+接口代理开发中，namespace必须是接口的全限定名
+id是接口中定义的方法名
+parameterType
+resultType
+-->
+<mapper namespace="com.loda.mapper.EmpMapper">
+    <select id="selectEmpByEmpno" parameterType="INT" resultType="emp">
+        select * from emp where empno = ${numaaa}
+    </select>
+
+    <select id="selectEmpBySalAndDeptno" parameterType="emp" resultType="emp">
+        <!--当有多个参数需要传入时，由于parameterType只能定义一个类型，接口编程中无法传递-->
+        <!--  select * from emp where sal > ${salary} and deptno = ${deptnum}-->
+        <!--        解决办法一：使用arg1, arg0-->
+        <!--        select * from emp where sal > ${arg0} and deptno = ${arg1}-->
+        <!--解决方法二：使用param1, param2-->
+        <!--        select * from emp where sal > ${param1} and deptno = ${param2}-->
+        <!--        解决方法三：使用@Param注解-->
+        <!--          select * from emp where sal > ${salary} and deptno = ${deptnum}-->
+        <!--        方法四：使用javabean对象-->
+        select * from emp where sal > ${sal} and deptno = ${deptno}
+    </select>
+
+    <select id="selectEmpDynamicIf" parameterType="emp" resultType="emp">
+        select * from emp where 1 = 1
+        <if test="sal != null">
+            and sal > #{sal}
+        </if>
+        <if test="deptno != null">
+            and deptno = #{deptno}
+        </if>
+    </select>
+
+    <select id="selectEmpDynamicWhere" parameterType="emp" resultType="emp">
+        select * from emp
+        <where>
+            <if test="sal != null">
+                and sal > #{sal}
+            </if>
+            <if test="deptno != null">
+                and deptno = #{deptno}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectEmpDynamicTrim" parameterType="emp" resultType="emp">
+        select * from emp
+        <trim prefix="where" prefixOverrides="and">
+            <if test="sal != null">
+                and sal > #{sal}
+            </if>
+            <if test="deptno != null">
+                and deptno = #{deptno}
+            </if>
+        </trim>
+    </select>
+
+    <select id="selectEmpByLike" parameterType="string" resultType="emp">
+        select * from emp where ename like '%' || #{str} || '%'
+
+        <!--        '%${str}%' 中间不能有空格-->
+        <!--        select * from emp where ename like '%${str}%'-->
+
+    </select>
+</mapper>

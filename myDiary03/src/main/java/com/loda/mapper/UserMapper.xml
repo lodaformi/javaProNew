@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.loda.dao.UserDao">
+    <select id="queryUserByIdTest" parameterType="java.lang.Integer" resultType="com.loda.entity.po.User">
+        select userId, uname, upwd, nick, head, mood
+        from tb_user where userId = #{id}
+    </select>
+
+    <select id="queryUserByName" parameterType="java.lang.String" resultType="com.loda.entity.po.User">
+        select userId, uname, upwd, nick, head, mood
+        from tb_user where uname = #{uname}
+    </select>
+
+    <update id="updateUser" parameterType="com.loda.entity.po.User">
+        update tb_user set nick = #{nick}, mood = #{mood}, head = #{head} where userId = #{userId}
+    </update>
+</mapper>

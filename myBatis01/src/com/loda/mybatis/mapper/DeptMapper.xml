@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.loda.mybatis.mapper.DeptMapper">
+
+    <select id="selectDeptByDeptno" parameterType="int" resultType="com.loda.mybatis.pojo.Dept">
+        select * from dept where deptno = #{deptno}
+    </select>
+
+    <select id="selectDeptAll"  resultType="com.loda.mybatis.pojo.Dept">
+        select * from dept
+    </select>
+</mapper>

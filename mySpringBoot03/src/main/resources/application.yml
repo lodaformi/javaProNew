@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: prod
+  thymeleaf:
+    prefix: classpath:/html/
+    cache: false
+
+
+#  freemarker:
+#    suffix: .ftl
+#    content-type: text/html
+#    charset: utf-8
+#    template-loader-path: classpath:/views/
