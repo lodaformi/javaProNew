@@ -4,20 +4,20 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.loda.dao.StuMapper">
 <select id="queryUserByUserName" parameterType="String" resultType="com.loda.entity.po.Stu">
-    select * from stu_call where name= #{stuName}
+    select * from stu_call where is_valid = 1 and name= #{stuName}
 </select>
 
     <select id="queryUserNotCall" resultType="String">
         select name
         from stu_call s join round r
-        where s.round != r.num
+        where s.is_valid = 1 and  s.round != r.num
     </select>
 
     <select id="queryUserRound" resultType="String" parameterType="Integer">
-        select round from stu_call where name = #{stuName}
+        select round from stu_call where is_valid = 1 and name = #{stuName}
     </select>
 
     <update id="updateCall" parameterType="com.loda.entity.po.Stu">
-        update stu_call set round = #{round}  where name = #{name}
+        update stu_call set round = #{round}  where is_valid = 1 and name = #{name}
     </update>
 </mapper>

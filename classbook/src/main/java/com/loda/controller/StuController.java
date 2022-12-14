@@ -5,8 +5,10 @@ import com.loda.entity.vo.ResultInfo;
 import com.loda.service.RoundService;
 import com.loda.service.StuService;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.method.HandlerMethod;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +27,20 @@ public class StuController {
 
     @Resource
     private RoundService roundService;
+
+    @RequestMapping("/demo2/{name}")
+    @ResponseBody
+    public String demo(String name, HttpServletRequest request){
+        System.out.println("获取到的name:"+name);
+        return "demo";
+    }
+
+    @RequestMapping("/demo/{id}")
+    @ResponseBody
+    public String demo(@PathVariable String name) {
+        System.out.println(name);
+        return "demo";
+    }
 
     @RequestMapping("updateCall")
     @ResponseBody
